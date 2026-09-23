@@ -1,0 +1,56 @@
+### Stylework Lead Tracker - REST API Client Tests
+@baseUrl = https://stylework-leads-crud.onrender.com
+# @baseUrl = http://localhost:5000
+
+### 1. Health Check
+GET {{baseUrl}}/api/health
+Accept: application/json
+
+### 2. List All Leads (Paginated & Sorted)
+GET {{baseUrl}}/api/leads?sortBy=createdAt&sortOrder=desc&limit=50
+Accept: application/json
+
+### 3. Search Leads by Name / Email / Phone
+GET {{baseUrl}}/api/leads?search=Aarav
+Accept: application/json
+
+### 4. Filter Leads by Status
+GET {{baseUrl}}/api/leads?status=Contacted
+Accept: application/json
+
+### 5. Get Pipeline KPI Statistics
+GET {{baseUrl}}/api/leads/stats
+Accept: application/json
+
+### 6. Create New Lead
+# @name createLead
+POST {{baseUrl}}/api/leads
+Content-Type: application/json
+
+{
+  "name": "Rohan Gupta",
+  "email": "rohan.gupta@enterprise.io",
+  "phone": "+91 98765 43210",
+  "status": "New",
+  "notes": "Looking for 15 dedicated desks in Gurgaon."
+}
+
+### 7. Get Lead by ID (Use ID from step 6 or an existing ID)
+@createdId = {{createLead.response.body.data._id}}
+GET {{baseUrl}}/api/leads/{{createdId}}
+Accept: application/json
+
+### 8. Update Lead Status
+PATCH {{baseUrl}}/api/leads/{{createdId}}/status
+Content-Type: application/json
+
+{
+  "status": "Qualified"
+}
+
+### 9. Delete Lead
+DELETE {{baseUrl}}/api/leads/{{createdId}}
+Accept: application/json
+
+### 10. Export Leads to CSV
+GET {{baseUrl}}/api/leads/export/csv

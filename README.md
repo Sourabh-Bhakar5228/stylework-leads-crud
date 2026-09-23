@@ -205,6 +205,99 @@ npm --prefix server test
 
 ---
 
+## 💻 cURL API Testing Guide (Copy-Paste Ready)
+
+You can run these commands directly in your terminal to test against either the **Live Render Production API** (`https://stylework-leads-crud.onrender.com`) or **Localhost** (`http://localhost:5000`):
+
+> **Base URL**: Set your target URL:
+> ```bash
+> API="https://stylework-leads-crud.onrender.com"
+> # Or for local: API="http://localhost:5000"
+> ```
+
+### 1. Health Check
+```bash
+curl -X GET "$API/api/health"
+```
+
+### 2. List All Leads (Paginated & Sorted)
+```bash
+curl -X GET "$API/api/leads?sortBy=createdAt&sortOrder=desc&limit=50"
+```
+
+### 3. Live Search Leads (by Name, Email, or Phone)
+```bash
+# Search by name
+curl -X GET "$API/api/leads?search=Aarav"
+
+# Search by domain / email
+curl -X GET "$API/api/leads?search=techcorp.io"
+
+# Search by phone number
+curl -X GET "$API/api/leads?search=98765"
+```
+
+### 4. Filter Leads by Status
+```bash
+curl -X GET "$API/api/leads?status=In%20Progress"
+curl -X GET "$API/api/leads?status=Contacted"
+curl -X GET "$API/api/leads?status=Closed%20-%20Won"
+```
+
+### 5. Get Pipeline KPI Statistics
+```bash
+curl -X GET "$API/api/leads/stats"
+```
+
+### 6. Create a New Lead (POST)
+```bash
+curl -X POST "$API/api/leads" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Karan Mehra",
+    "email": "karan.mehra@enterprise.in",
+    "phone": "+91 98765 12345",
+    "status": "New",
+    "notes": "Looking for 25 hot desks and meeting room credits in Cyber City Gurgaon"
+  }'
+```
+
+### 7. Get Single Lead by ID
+```bash
+curl -X GET "$API/api/leads/<LEAD_ID>"
+```
+
+### 8. Update Lead Status Only (PATCH)
+```bash
+curl -X PATCH "$API/api/leads/<LEAD_ID>/status" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "Qualified"
+  }'
+```
+
+### 9. Full Update of Lead (PUT)
+```bash
+curl -X PUT "$API/api/leads/<LEAD_ID>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Karan Mehra",
+    "notes": "Contract agreement drafted for 12 months."
+  }'
+```
+
+### 10. Delete Lead (DELETE)
+```bash
+curl -X DELETE "$API/api/leads/<LEAD_ID>"
+```
+
+### 11. Export Leads to CSV File
+```bash
+curl -X GET "$API/api/leads/export/csv" -o leads_export.csv
+```
+
+---
+
 ## 🌐 Deployment Instructions
 
 ### 1. Backend Deployment (Render / Railway / Fly.io)
