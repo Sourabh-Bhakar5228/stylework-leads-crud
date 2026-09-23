@@ -1,7 +1,16 @@
 import { Lead, LeadFormData, LeadStats, LeadStatus, PaginationMeta } from '../types';
 
-const BASE_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
-const API_BASE = `${BASE_URL}/api/leads`;
+const getBaseUrl = (): string => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/$/, '');
+  }
+  if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
+    return 'https://stylework-leads-crud.onrender.com';
+  }
+  return '';
+};
+
+const API_BASE = `${getBaseUrl()}/api/leads`;
 
 interface FetchLeadsParams {
   search?: string;
