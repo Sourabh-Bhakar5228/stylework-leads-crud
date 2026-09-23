@@ -2,7 +2,8 @@
 
 > **Assignment Submission**: Junior Full Stack Engineer Assignment  
 > **Technology Stack**: React 18 + TypeScript + Vite | Node.js + Express + TypeScript | MongoDB + Mongoose  
-> **Live Production URL**: [https://stylework-leads-crud.onrender.com](https://stylework-leads-crud.onrender.com)  
+> **Live Vercel Frontend**: [https://stylework-leads-crud.vercel.app](https://stylework-leads-crud.vercel.app)  
+> **Live Render Backend & App**: [https://stylework-leads-crud.onrender.com](https://stylework-leads-crud.onrender.com)  
 > **Live API Endpoint**: [https://stylework-leads-crud.onrender.com/api/leads](https://stylework-leads-crud.onrender.com/api/leads)  
 > **Live Health Check**: [https://stylework-leads-crud.onrender.com/api/health](https://stylework-leads-crud.onrender.com/api/health)  
 > **Architecture**: Decoupled Client-Server Monorepo with Docker Orchestration and Dual-Mode MongoDB Storage  
